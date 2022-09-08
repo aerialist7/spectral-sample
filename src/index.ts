@@ -56,15 +56,6 @@ spectral.setRuleset({
     "path-not-include-query": true,
     "tag-description": true,
     "typed-enum": true,
-    "nc-oas3-audience": {
-      description: "The API audience from the point of customer view is needed.",
-      message: "Missing the {{property}}",
-      given: "$.info.x-nc-api-audience",
-      severity: "warn",
-      then: {
-        function: truthy,
-      },
-    },
   },
 })
 
