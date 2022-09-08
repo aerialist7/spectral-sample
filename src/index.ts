@@ -1,6 +1,6 @@
 import { Resolver } from "@stoplight/json-ref-resolver"
-import { Spectral } from "@stoplight/spectral-core"
-import { truthy } from "@stoplight/spectral-functions"
+import { Document, Spectral } from "@stoplight/spectral-core"
+import * as Parsers from "@stoplight/spectral-parsers"
 import { oas } from "@stoplight/spectral-rulesets"
 
 const resolver = new Resolver({
@@ -61,5 +61,6 @@ spectral.setRuleset({
 
 fetch("./root.yaml")
   .then(data => data.text())
-  .then(text => spectral.run(text))
+  // .then(text => spectral.run(text)) // Use this block to reproduce `Empty source in result` https://github.com/stoplightio/spectral/issues/2227
+  .then(text => spectral.run(new Document(text, Parsers.Yaml, "/root.yaml")))
   .then(console.log)
